@@ -1,0 +1,822 @@
+{
+  "info": {
+    "_postman_id": "2043b7f5-e211-408e-9289-ca708d525b69",
+    "name": "hh-vacancies-mocked",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53812469",
+    "_collection_link": "https://go.postman.co/collection/53812469-2043b7f5-e211-408e-9289-ca708d525b69?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "TC-VAC-01, Успешный поиск без параметров",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//проверка статус кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n// проверка наличия обязательного поля page \npm.test(\"There is the field page\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('page');\n});\n// проверка наличия обязательного поля found\npm.test(\"There is the field found\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('found');\n});\n// проверка наличия обязательного поля pages\npm.test(\"There is the field page\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('pages');\n});\n//проверка наличия обязательного поля per_page\npm.test(\"There is the field peg_page\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('per_page');\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{mock_url}}",
+          "host": [
+            "{{mock_url}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-VAC-02, параметры переданы с ошибкой",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\n    pm.response.to.have.status(400);\n});\n\npm.test(\"Response body is not empty\", function() {\n    const dataJson = response.json();\n    pm.expect(dataJson).to.not.be.empty;\n})"
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept": true,
+          "accept-encoding": true,
+          "connection": true
+        }
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "HH-User-Agent",
+            "value": "MyApp/1.0 (my-app-feedback@example.com)",
+            "description": "Название приложения и контактная почта разработчика (см. [Информация о клиенте](#section/Obshaya-informaciya/Trebovaniya-k-zaprosam))\n"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "<token>",
+            "description": "Added as a part of security scheme: oauth2"
+          },
+          {
+            "key": "x-mock-response-name",
+            "value": "400, bad-request"
+          }
+        ],
+        "url": {
+          "raw": "{{mock_url}}/vacancies?page=0&per_page=10&text=string&search_field=string&experience=string&employment=string&schedule=string&area=string&metro=string&professional_role=string&industry=string&employer_id=string&currency=string&salary=5629.074340772931&salary_frequency=string&salary_mode=string&label=string&only_with_salary=false&period=5629.074340772931&date_from=string&date_to=string&top_lat=5629.074340772931&bottom_lat=5629.074340772931&left_lng=5629.074340772931&right_lng=5629.074340772931&order_by=string&sort_point_lat=5629.074340772931&sort_point_lng=5629.074340772931&clusters=false&describe_arguments=false&no_magic=false&premium=false&responses_count_enabled=false&part_time=string&accept_temporary=false&employment_form=string&work_schedule_by_days=string&working_hours=string&work_format=string&excluded_text=string&education=string&driver_license_types=string&host=hh.ru&locale=EN&x-mock-request-name=параметры переданы с ошибкой",
+          "host": [
+            "{{mock_url}}"
+          ],
+          "path": [
+            "vacancies"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0",
+              "description": "Номер страницы"
+            },
+            {
+              "key": "per_page",
+              "value": "10",
+              "description": "Количество элементов"
+            },
+            {
+              "key": "text",
+              "value": "string",
+              "description": "Переданное значение ищется в полях вакансии, указанных в параметре `search_field`. Доступен [язык запросов](https://hh.ru/article/1175). Специально для этого поля есть [автодополнение](#tag/Podskazki-po-klyuchevym-slovam/operation/get-vacancy-search-keywords)"
+            },
+            {
+              "key": "search_field",
+              "value": "string",
+              "description": "Область поиска. Справочник с возможными значениями: `vacancy_search_fields` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\nПо умолчанию, используются все поля. Можно указать несколько значений\n"
+            },
+            {
+              "key": "experience",
+              "value": "string",
+              "description": "Опыт работы. Необходимо передавать `id` из справочника `experience` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "employment",
+              "value": "string",
+              "description": "Тип занятости. Необходимо передавать `id` из справочника `employment` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n\nЗаменен на параметры `employment_form` и `label`\n"
+            },
+            {
+              "key": "schedule",
+              "value": "string",
+              "description": "График работы. Необходимо передавать `id` из справочника `schedule` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n\nЗаменен на параметры `work_schedule_by_days`, `work_format` и `employment_form`\n"
+            },
+            {
+              "key": "area",
+              "value": "string",
+              "description": "Регион. Необходимо передавать `id` из справочника [/areas](#tag/Obshie-spravochniki/operation/get-areas). Можно указать несколько значений\n"
+            },
+            {
+              "key": "metro",
+              "value": "string",
+              "description": "Ветка или станция метро. Необходимо передавать `id` из справочника [/metro](#tag/Obshie-spravochniki/operation/get-metro-stations). Можно указать несколько значений\n"
+            },
+            {
+              "key": "professional_role",
+              "value": "string",
+              "description": "Профессиональная область. Необходимо передавать `id` из справочника [/professional_roles](#tag/Obshie-spravochniki/operation/get-professional-roles-dictionary)\n"
+            },
+            {
+              "key": "industry",
+              "value": "string",
+              "description": "Индустрия компании, разместившей вакансию. Необходимо передавать `id` из справочника [/industries](#tag/Obshie-spravochniki/operation/get-industries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "employer_id",
+              "value": "string",
+              "description": "Идентификатор [работодателя](#tag/Rabotodatel). Можно указать несколько значений\n"
+            },
+            {
+              "key": "currency",
+              "value": "string",
+              "description": "Код валюты. Справочник с возможными значениями: `currency` (ключ `code`) в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Имеет смысл указывать только совместно с параметром `salary`\n"
+            },
+            {
+              "key": "salary",
+              "value": "5629.074340772931",
+              "description": "Размер заработной платы. Если указано это поле, но не указано `currency`, то для `currency` используется значение RUR.\nПри указании значения будут найдены вакансии, в которых вилка зарплаты близка к указанной в запросе. При этом значения пересчитываются по текущим курсам ЦБ РФ. Например, при указании `salary=100&currency=EUR` будут найдены вакансии, где вилка зарплаты указана в рублях и после пересчёта в Евро близка к 100 EUR.\nПо умолчанию будут также найдены вакансии, в которых вилка зарплаты не указана, чтобы такие вакансии отфильтровать, используйте `only_with_salary=true`\n"
+            },
+            {
+              "key": "salary_frequency",
+              "value": "string",
+              "description": "Частота выплат. Необходимо передавать `id` из справочника `salary_range_frequency` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "salary_mode",
+              "value": "string",
+              "description": "Гранулярность зарплаты. Необходимо передавать `id` из справочника `salary_range_mode` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать одно значение\n"
+            },
+            {
+              "key": "label",
+              "value": "string",
+              "description": "Фильтр по меткам вакансий. Необходимо передавать `id` из справочника `vacancy_label` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "only_with_salary",
+              "value": "false",
+              "description": "Показывать вакансии только с указанием зарплаты\n\nЗаменен на параметр `label=with_salary`\n"
+            },
+            {
+              "key": "period",
+              "value": "5629.074340772931",
+              "description": "Количество дней, в пределах которых производится поиск по вакансиям\n"
+            },
+            {
+              "key": "date_from",
+              "value": "string",
+              "description": "Дата, которая ограничивает снизу диапазон дат публикации вакансий. Нельзя передавать вместе с параметром `period`.\nЗначение указывается в формате ISO 8601 (`YYYY-MM-DD`) или с точностью до секунды `YYYY-MM-DDThh:mm:ss±hhmm`. Указанное значение будет округлено до ближайших пяти минут\n"
+            },
+            {
+              "key": "date_to",
+              "value": "string",
+              "description": "Дата, которая ограничивает сверху диапазон дат публикации вакансий. Нельзя передавать вместе с параметром `period`.\nЗначение указывается в формате ISO 8601 (`YYYY-MM-DD`) или с точностью до секунды `YYYY-MM-DDThh:mm:ss±hhmm`. Указанное значение будет округлено до ближайших пяти минут\n"
+            },
+            {
+              "key": "top_lat",
+              "value": "5629.074340772931",
+              "description": "Верхняя граница широты.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "bottom_lat",
+              "value": "5629.074340772931",
+              "description": "Нижняя граница широты.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "left_lng",
+              "value": "5629.074340772931",
+              "description": "Левая граница долготы.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "right_lng",
+              "value": "5629.074340772931",
+              "description": "Правая граница долготы.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "order_by",
+              "value": "string",
+              "description": "Сортировка списка вакансий. Справочник с возможными значениями: `vacancy_search_order` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\nЕсли выбрана сортировка по удалённости от гео-точки `distance`, необходимо также задать её координаты: `sort_point_lat`, `sort_point_lng`\n"
+            },
+            {
+              "key": "sort_point_lat",
+              "value": "5629.074340772931",
+              "description": "Значение географической широты точки, по расстоянию от которой будут отсортированы вакансии. Необходимо указывать только, если `order_by` установлено в `distance`\n"
+            },
+            {
+              "key": "sort_point_lng",
+              "value": "5629.074340772931",
+              "description": "Значение географической долготы точки, по расстоянию от которой будут отсортированы вакансии. Необходимо указывать только, если `order_by` установлено в `distance`\n"
+            },
+            {
+              "key": "clusters",
+              "value": "false",
+              "description": "Возвращать ли [кластеры для данного поиска](#tag/Poisk-vakansij/Klastery-v-poiske-vakansij)\n"
+            },
+            {
+              "key": "describe_arguments",
+              "value": "false",
+              "description": "Возвращать ли описание использованных параметров поиска (массив `arguments`)\n"
+            },
+            {
+              "key": "no_magic",
+              "value": "false",
+              "description": "Если значение `true` — автоматическое преобразование вакансий отключено.\nПри включённом автоматическом преобразовании, будет предпринята попытка изменить текстовый запрос пользователя на набор параметров. Например, запрос `text=москва бухгалтер 100500` будет преобразован в `text=бухгалтер&only_with_salary=true&area=1&salary=100500`\n"
+            },
+            {
+              "key": "premium",
+              "value": "false",
+              "description": "Если значение `true` — в сортировке вакансий будет учтены премиум-вакансии. Такая сортировка используется на сайте\n"
+            },
+            {
+              "key": "responses_count_enabled",
+              "value": "false",
+              "description": "Если значение `true` — дополнительное поле `counters` с количеством откликов для вакансии включено\n"
+            },
+            {
+              "key": "part_time",
+              "value": "string",
+              "description": "Вакансии для подработки. Возможные значения:\n* Все элементы из `working_days` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Все элементы из `working_time_intervals` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Все элементы из `working_time_modes` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Элементы `part` или `project` из `employment` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Элемент `accept_temporary`, показывает вакансии только с временным трудоустройством.\n\n\nМожно указать несколько значений\n\nЗаменен на параметры `working_hours`, `work_schedule_by_days`, `employment_form` и `label`\n"
+            },
+            {
+              "key": "accept_temporary",
+              "value": "false",
+              "description": "Если значение `true` — то поиск происходит только по вакансиям временной работы\n"
+            },
+            {
+              "key": "employment_form",
+              "value": "string",
+              "description": "Тип занятости. Необходимо передавать `id` из справочника `vacancy_search_employment_form` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "work_schedule_by_days",
+              "value": "string",
+              "description": "График работы. Необходимо передавать `id` из справочника `work_schedule_by_days` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "working_hours",
+              "value": "string",
+              "description": "Рабочие часы в день. Необходимо передавать `id` из справочника `working_hours` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "work_format",
+              "value": "string",
+              "description": "Формат работы. Необходимо передавать `id` из справочника `work_format` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "excluded_text",
+              "value": "string",
+              "description": "Исключить слова. Из результата будут исключены вакансии, содержащие слова, переданные в этом параметре. Слова разделяются запятой\n"
+            },
+            {
+              "key": "education",
+              "value": "string",
+              "description": "Образование. Можно указать несколько значений. Возможные значения:\n* `not_required_or_not_specified` - не требуется или не указано\n* `special_secondary` - среднее специальное\n* `higher` - высшее\n"
+            },
+            {
+              "key": "driver_license_types",
+              "value": "string",
+              "description": "Категория водительских прав. Необходимо передавать `id` из справочника `driver_license_types` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "host",
+              "value": "hh.ru",
+              "description": "Доменное имя сайта (см. [Выбор сайта](#section/Obshaya-informaciya/Vybor-sajta))\n"
+            },
+            {
+              "key": "locale",
+              "value": "EN",
+              "description": "Идентификатор локали (см. [Локализация](#tag/Obshie-spravochniki/operation/get-locales))\n"
+            },
+            {
+              "key": "x-mock-request-name",
+              "value": "параметры переданы с ошибкой"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-VAC-03, запрос без авторизации",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Response status code is 403\", function () {\n    pm.response.to.have.status(403);\n});\n\npm.test(\"Response body is not empty\", function() {\n    const dataJson = pm.response.json();\n    pm.expect(dataJson).to.not.be.empty;\n})"
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept": true,
+          "accept-encoding": true
+        }
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "HH-User-Agent",
+            "value": "MyApp/1.0 (my-app-feedback@example.com)",
+            "description": "Название приложения и контактная почта разработчика (см. [Информация о клиенте](#section/Obshaya-informaciya/Trebovaniya-k-zaprosam))\n"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "<token>",
+            "description": "Added as a part of security scheme: oauth2"
+          },
+          {
+            "key": "x-mock-response-name",
+            "value": "403, captcha "
+          }
+        ],
+        "url": {
+          "raw": "{{mock_url}}/vacancies?page=0&per_page=10&text=string&search_field=string&experience=string&employment=string&schedule=string&area=string&metro=string&professional_role=string&industry=string&employer_id=string&currency=string&salary=5629.074340772931&salary_frequency=string&salary_mode=string&label=string&only_with_salary=false&period=5629.074340772931&date_from=string&date_to=string&top_lat=5629.074340772931&bottom_lat=5629.074340772931&left_lng=5629.074340772931&right_lng=5629.074340772931&order_by=string&sort_point_lat=5629.074340772931&sort_point_lng=5629.074340772931&clusters=false&describe_arguments=false&no_magic=false&premium=false&responses_count_enabled=false&part_time=string&accept_temporary=false&employment_form=string&work_schedule_by_days=string&working_hours=string&work_format=string&excluded_text=string&education=string&driver_license_types=string&host=hh.ru&locale=EN",
+          "host": [
+            "{{mock_url}}"
+          ],
+          "path": [
+            "vacancies"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "per_page",
+              "value": "10"
+            },
+            {
+              "key": "text",
+              "value": "string"
+            },
+            {
+              "key": "search_field",
+              "value": "string"
+            },
+            {
+              "key": "experience",
+              "value": "string"
+            },
+            {
+              "key": "employment",
+              "value": "string"
+            },
+            {
+              "key": "schedule",
+              "value": "string"
+            },
+            {
+              "key": "area",
+              "value": "string"
+            },
+            {
+              "key": "metro",
+              "value": "string"
+            },
+            {
+              "key": "professional_role",
+              "value": "string"
+            },
+            {
+              "key": "industry",
+              "value": "string"
+            },
+            {
+              "key": "employer_id",
+              "value": "string"
+            },
+            {
+              "key": "currency",
+              "value": "string"
+            },
+            {
+              "key": "salary",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "salary_frequency",
+              "value": "string"
+            },
+            {
+              "key": "salary_mode",
+              "value": "string"
+            },
+            {
+              "key": "label",
+              "value": "string"
+            },
+            {
+              "key": "only_with_salary",
+              "value": "false"
+            },
+            {
+              "key": "period",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "date_from",
+              "value": "string"
+            },
+            {
+              "key": "date_to",
+              "value": "string"
+            },
+            {
+              "key": "top_lat",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "bottom_lat",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "left_lng",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "right_lng",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "order_by",
+              "value": "string"
+            },
+            {
+              "key": "sort_point_lat",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "sort_point_lng",
+              "value": "5629.074340772931"
+            },
+            {
+              "key": "clusters",
+              "value": "false"
+            },
+            {
+              "key": "describe_arguments",
+              "value": "false"
+            },
+            {
+              "key": "no_magic",
+              "value": "false"
+            },
+            {
+              "key": "premium",
+              "value": "false"
+            },
+            {
+              "key": "responses_count_enabled",
+              "value": "false"
+            },
+            {
+              "key": "part_time",
+              "value": "string"
+            },
+            {
+              "key": "accept_temporary",
+              "value": "false"
+            },
+            {
+              "key": "employment_form",
+              "value": "string"
+            },
+            {
+              "key": "work_schedule_by_days",
+              "value": "string"
+            },
+            {
+              "key": "working_hours",
+              "value": "string"
+            },
+            {
+              "key": "work_format",
+              "value": "string"
+            },
+            {
+              "key": "excluded_text",
+              "value": "string"
+            },
+            {
+              "key": "education",
+              "value": "string"
+            },
+            {
+              "key": "driver_license_types",
+              "value": "string"
+            },
+            {
+              "key": "host",
+              "value": "hh.ru"
+            },
+            {
+              "key": "locale",
+              "value": "EN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-VAC-04, запрос с параметрами за пределами выдачи",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n\npm.test(\"Response body is not empty\", function() {\n    const dataJson = pm.response.json();\n    pm.expect(dataJson).to.not.be.empty;\n})"
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept": true,
+          "user-agent": true
+        }
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "HH-User-Agent",
+            "value": "MyApp/1.0 (my-app-feedback@example.com)",
+            "description": "Название приложения и контактная почта разработчика (см. [Информация о клиенте](#section/Obshaya-informaciya/Trebovaniya-k-zaprosam))\n"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "<token>",
+            "description": "Added as a part of security scheme: oauth2"
+          },
+          {
+            "key": "x-mock-response-name",
+            "value": "404, not found"
+          }
+        ],
+        "url": {
+          "raw": "{{mock_url}}/vacancies?page=0&per_page=10&text=string&search_field=string&experience=string&employment=string&schedule=string&area=string&metro=string&professional_role=string&industry=string&employer_id=string&currency=string&salary=5629.074340772931&salary_frequency=string&salary_mode=string&label=string&only_with_salary=false&period=5629.074340772931&date_from=string&date_to=string&top_lat=5629.074340772931&bottom_lat=5629.074340772931&left_lng=5629.074340772931&right_lng=5629.074340772931&order_by=string&sort_point_lat=5629.074340772931&sort_point_lng=5629.074340772931&clusters=false&describe_arguments=false&no_magic=false&premium=false&responses_count_enabled=false&part_time=string&accept_temporary=false&employment_form=string&work_schedule_by_days=string&working_hours=string&work_format=string&excluded_text=string&education=string&driver_license_types=string&host=hh.ru&locale=EN",
+          "host": [
+            "{{mock_url}}"
+          ],
+          "path": [
+            "vacancies"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0",
+              "description": "Номер страницы"
+            },
+            {
+              "key": "per_page",
+              "value": "10",
+              "description": "Количество элементов"
+            },
+            {
+              "key": "text",
+              "value": "string",
+              "description": "Переданное значение ищется в полях вакансии, указанных в параметре `search_field`. Доступен [язык запросов](https://hh.ru/article/1175). Специально для этого поля есть [автодополнение](#tag/Podskazki-po-klyuchevym-slovam/operation/get-vacancy-search-keywords)"
+            },
+            {
+              "key": "search_field",
+              "value": "string",
+              "description": "Область поиска. Справочник с возможными значениями: `vacancy_search_fields` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\nПо умолчанию, используются все поля. Можно указать несколько значений\n"
+            },
+            {
+              "key": "experience",
+              "value": "string",
+              "description": "Опыт работы. Необходимо передавать `id` из справочника `experience` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "employment",
+              "value": "string",
+              "description": "Тип занятости. Необходимо передавать `id` из справочника `employment` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n\nЗаменен на параметры `employment_form` и `label`\n"
+            },
+            {
+              "key": "schedule",
+              "value": "string",
+              "description": "График работы. Необходимо передавать `id` из справочника `schedule` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n\nЗаменен на параметры `work_schedule_by_days`, `work_format` и `employment_form`\n"
+            },
+            {
+              "key": "area",
+              "value": "string",
+              "description": "Регион. Необходимо передавать `id` из справочника [/areas](#tag/Obshie-spravochniki/operation/get-areas). Можно указать несколько значений\n"
+            },
+            {
+              "key": "metro",
+              "value": "string",
+              "description": "Ветка или станция метро. Необходимо передавать `id` из справочника [/metro](#tag/Obshie-spravochniki/operation/get-metro-stations). Можно указать несколько значений\n"
+            },
+            {
+              "key": "professional_role",
+              "value": "string",
+              "description": "Профессиональная область. Необходимо передавать `id` из справочника [/professional_roles](#tag/Obshie-spravochniki/operation/get-professional-roles-dictionary)\n"
+            },
+            {
+              "key": "industry",
+              "value": "string",
+              "description": "Индустрия компании, разместившей вакансию. Необходимо передавать `id` из справочника [/industries](#tag/Obshie-spravochniki/operation/get-industries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "employer_id",
+              "value": "string",
+              "description": "Идентификатор [работодателя](#tag/Rabotodatel). Можно указать несколько значений\n"
+            },
+            {
+              "key": "currency",
+              "value": "string",
+              "description": "Код валюты. Справочник с возможными значениями: `currency` (ключ `code`) в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Имеет смысл указывать только совместно с параметром `salary`\n"
+            },
+            {
+              "key": "salary",
+              "value": "5629.074340772931",
+              "description": "Размер заработной платы. Если указано это поле, но не указано `currency`, то для `currency` используется значение RUR.\nПри указании значения будут найдены вакансии, в которых вилка зарплаты близка к указанной в запросе. При этом значения пересчитываются по текущим курсам ЦБ РФ. Например, при указании `salary=100&currency=EUR` будут найдены вакансии, где вилка зарплаты указана в рублях и после пересчёта в Евро близка к 100 EUR.\nПо умолчанию будут также найдены вакансии, в которых вилка зарплаты не указана, чтобы такие вакансии отфильтровать, используйте `only_with_salary=true`\n"
+            },
+            {
+              "key": "salary_frequency",
+              "value": "string",
+              "description": "Частота выплат. Необходимо передавать `id` из справочника `salary_range_frequency` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "salary_mode",
+              "value": "string",
+              "description": "Гранулярность зарплаты. Необходимо передавать `id` из справочника `salary_range_mode` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать одно значение\n"
+            },
+            {
+              "key": "label",
+              "value": "string",
+              "description": "Фильтр по меткам вакансий. Необходимо передавать `id` из справочника `vacancy_label` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "only_with_salary",
+              "value": "false",
+              "description": "Показывать вакансии только с указанием зарплаты\n\nЗаменен на параметр `label=with_salary`\n"
+            },
+            {
+              "key": "period",
+              "value": "5629.074340772931",
+              "description": "Количество дней, в пределах которых производится поиск по вакансиям\n"
+            },
+            {
+              "key": "date_from",
+              "value": "string",
+              "description": "Дата, которая ограничивает снизу диапазон дат публикации вакансий. Нельзя передавать вместе с параметром `period`.\nЗначение указывается в формате ISO 8601 (`YYYY-MM-DD`) или с точностью до секунды `YYYY-MM-DDThh:mm:ss±hhmm`. Указанное значение будет округлено до ближайших пяти минут\n"
+            },
+            {
+              "key": "date_to",
+              "value": "string",
+              "description": "Дата, которая ограничивает сверху диапазон дат публикации вакансий. Нельзя передавать вместе с параметром `period`.\nЗначение указывается в формате ISO 8601 (`YYYY-MM-DD`) или с точностью до секунды `YYYY-MM-DDThh:mm:ss±hhmm`. Указанное значение будет округлено до ближайших пяти минут\n"
+            },
+            {
+              "key": "top_lat",
+              "value": "5629.074340772931",
+              "description": "Верхняя граница широты.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "bottom_lat",
+              "value": "5629.074340772931",
+              "description": "Нижняя граница широты.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "left_lng",
+              "value": "5629.074340772931",
+              "description": "Левая граница долготы.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "right_lng",
+              "value": "5629.074340772931",
+              "description": "Правая граница долготы.\nПри поиске используется значение указанного в вакансии адреса. Принимаемое значение — градусы в виде десятичной дроби.\nНеобходимо передавать одновременно все четыре параметра гео-координат, иначе вернется ошибка\n"
+            },
+            {
+              "key": "order_by",
+              "value": "string",
+              "description": "Сортировка списка вакансий. Справочник с возможными значениями: `vacancy_search_order` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\nЕсли выбрана сортировка по удалённости от гео-точки `distance`, необходимо также задать её координаты: `sort_point_lat`, `sort_point_lng`\n"
+            },
+            {
+              "key": "sort_point_lat",
+              "value": "5629.074340772931",
+              "description": "Значение географической широты точки, по расстоянию от которой будут отсортированы вакансии. Необходимо указывать только, если `order_by` установлено в `distance`\n"
+            },
+            {
+              "key": "sort_point_lng",
+              "value": "5629.074340772931",
+              "description": "Значение географической долготы точки, по расстоянию от которой будут отсортированы вакансии. Необходимо указывать только, если `order_by` установлено в `distance`\n"
+            },
+            {
+              "key": "clusters",
+              "value": "false",
+              "description": "Возвращать ли [кластеры для данного поиска](#tag/Poisk-vakansij/Klastery-v-poiske-vakansij)\n"
+            },
+            {
+              "key": "describe_arguments",
+              "value": "false",
+              "description": "Возвращать ли описание использованных параметров поиска (массив `arguments`)\n"
+            },
+            {
+              "key": "no_magic",
+              "value": "false",
+              "description": "Если значение `true` — автоматическое преобразование вакансий отключено.\nПри включённом автоматическом преобразовании, будет предпринята попытка изменить текстовый запрос пользователя на набор параметров. Например, запрос `text=москва бухгалтер 100500` будет преобразован в `text=бухгалтер&only_with_salary=true&area=1&salary=100500`\n"
+            },
+            {
+              "key": "premium",
+              "value": "false",
+              "description": "Если значение `true` — в сортировке вакансий будет учтены премиум-вакансии. Такая сортировка используется на сайте\n"
+            },
+            {
+              "key": "responses_count_enabled",
+              "value": "false",
+              "description": "Если значение `true` — дополнительное поле `counters` с количеством откликов для вакансии включено\n"
+            },
+            {
+              "key": "part_time",
+              "value": "string",
+              "description": "Вакансии для подработки. Возможные значения:\n* Все элементы из `working_days` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Все элементы из `working_time_intervals` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Все элементы из `working_time_modes` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Элементы `part` или `project` из `employment` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries).\n* Элемент `accept_temporary`, показывает вакансии только с временным трудоустройством.\n\n\nМожно указать несколько значений\n\nЗаменен на параметры `working_hours`, `work_schedule_by_days`, `employment_form` и `label`\n"
+            },
+            {
+              "key": "accept_temporary",
+              "value": "false",
+              "description": "Если значение `true` — то поиск происходит только по вакансиям временной работы\n"
+            },
+            {
+              "key": "employment_form",
+              "value": "string",
+              "description": "Тип занятости. Необходимо передавать `id` из справочника `vacancy_search_employment_form` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "work_schedule_by_days",
+              "value": "string",
+              "description": "График работы. Необходимо передавать `id` из справочника `work_schedule_by_days` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "working_hours",
+              "value": "string",
+              "description": "Рабочие часы в день. Необходимо передавать `id` из справочника `working_hours` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "work_format",
+              "value": "string",
+              "description": "Формат работы. Необходимо передавать `id` из справочника `work_format` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "excluded_text",
+              "value": "string",
+              "description": "Исключить слова. Из результата будут исключены вакансии, содержащие слова, переданные в этом параметре. Слова разделяются запятой\n"
+            },
+            {
+              "key": "education",
+              "value": "string",
+              "description": "Образование. Можно указать несколько значений. Возможные значения:\n* `not_required_or_not_specified` - не требуется или не указано\n* `special_secondary` - среднее специальное\n* `higher` - высшее\n"
+            },
+            {
+              "key": "driver_license_types",
+              "value": "string",
+              "description": "Категория водительских прав. Необходимо передавать `id` из справочника `driver_license_types` в [/dictionaries](#tag/Obshie-spravochniki/operation/get-dictionaries). Можно указать несколько значений\n"
+            },
+            {
+              "key": "host",
+              "value": "hh.ru",
+              "description": "Доменное имя сайта (см. [Выбор сайта](#section/Obshaya-informaciya/Vybor-sajta))\n"
+            },
+            {
+              "key": "locale",
+              "value": "EN",
+              "description": "Идентификатор локали (см. [Локализация](#tag/Obshie-spravochniki/operation/get-locales))\n"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

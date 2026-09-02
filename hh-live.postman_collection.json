@@ -1,0 +1,502 @@
+{
+  "info": {
+    "_postman_id": "22d78448-abf1-44ce-a15d-c86c20c2de17",
+    "name": "hh-live",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53812469",
+    "_collection_link": "https://go.postman.co/collection/53812469-22d78448-abf1-44ce-a15d-c86c20c2de17?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "валидация обязательности заголовка user-agent",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "user-agent": true
+        }
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}dictionaries",
+          "host": [
+            "{{base_url}}dictionaries"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Проверка недопустимого HTTP метода",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}dictionaries",
+          "host": [
+            "{{base_url}}dictionaries"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-DICT-01_03",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}dictionaries",
+          "host": [
+            "{{base_url}}dictionaries"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-DICT-04, проверка работы query параметра locale=EN",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}dictionaries?locale=EN",
+          "host": [
+            "{{base_url}}dictionaries"
+          ],
+          "query": [
+            {
+              "key": "locale",
+              "value": "EN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-DICT-06, проверка невалидного query параметра locale с цифровым значением",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}dictionaries?locale=4212342",
+          "host": [
+            "{{base_url}}dictionaries"
+          ],
+          "query": [
+            {
+              "key": "locale",
+              "value": "4212342"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-01, Проверка статус кода и времени ответа",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n})\n\npm.test(\"Response time is less than 1 second\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Response body is not empty\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.not.empty;\n});\n\n\npm.test(\"Root areas contain required fields: 'id', 'name', 'areas'\", function () {\n    var jsonData = pm.response.json();\n    jsonData.forEach(function(country) {\n        pm.expect(country, `Country object missing required properties`).to.include.keys('id', 'name', 'areas');\n    });\n});\n\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas",
+          "host": [
+            "{{base_url}}areas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-03, проверка работы query параметра locale=EN",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Response body contains no Cyrillic characters (EN localization check)\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas?locale=EN",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "query": [
+            {
+              "key": "locale",
+              "value": "EN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-04, проверка недопустимого http метода",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}areas",
+          "host": [
+            "{{base_url}}areas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-05, проверка статус кода и времени ответа",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Проверка статус-кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n// Проверка времени ответа от сервера\npm.test(\"Response time is less than 200ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n// Проверка на то, что корневой id строго равен 113\npm.test(\"Root ID is strictly equal to '113'\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.id).to.eql(\"113\");\n});\n// Проверка на то, что ответ от сервера является объектов а не массивом\npm.test(\"Response is an Object (not Array)\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.an('object');\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/113",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "113"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-06, проверка query параметра locale=EN",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Проверка того, что ответ не содержит кириллицы \npm.test(\"Response body contains no Cyrillic characters (EN localization check)\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/113?locale=EN",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "113"
+          ],
+          "query": [
+            {
+              "key": "locale",
+              "value": "EN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-07, запрос конечного узла без дочерних элементов",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// проверка статус кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n// проверка того, что ключ 'areas' является пустым\npm.test(\"Field 'areas' is empty\", function () {\n    var jsonData = pm.response.json();\npm.expect(jsonData.areas).to.be.empty;\n});\n// проверка того, что поле area является массивом\npm.test(\"Field 'areas' is an array\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('areas');\n    pm.expect(jsonData.areas).to.be.an('array');\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/14",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "14"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-08, проверка связи \"ребенок- родитель\"",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Проверка статус кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\n// Проверка на то что возвращается объект с id=1\n pm.test(\"Returning object contains field id=1\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.id).to.eql(\"1\");\n});\n\n// Проверка на то что родительский id равен 113\npm.test(\"Parent id is 113\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.parent_id).to.eql(\"113\");\n});\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/1",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-09, запрос невалидного id (заведомо несуществующий)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "//проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что ответ от сервера содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"description\")\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/312412",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "312412"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-10, проверка обработки нулевого значения area_id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/0",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "0"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-11, проверка обработки отрицательного значения",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/-1",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "-1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-12, проверка обработки дробного значения",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/115.5",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "115.5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-13, проверка обработки числа int32+1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/2147483648",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "2147483648"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-14, проверка обработки строкового значения",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/abc",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "abc"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AREA-15, проверка обработки небуквенно числовых спецсимволов",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}areas/!@#$%",
+          "host": [
+            "{{base_url}}areas"
+          ],
+          "path": [
+            "!@"
+          ],
+          "hash": "$%"
+        }
+      },
+      "response": []
+    }
+  ]
+}
