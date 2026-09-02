@@ -24,6 +24,7 @@ jobs:
             --reporter-allure-resultsDir allure-results
 
       - name: Run mocked collection (vacancies)
+        if: always()
         run: |
           newman run ./hh-vacancies-mocked.postman_collection.json \
             -e ./api.hh.ru.postman_environment.json \
@@ -37,12 +38,14 @@ jobs:
         with:
           allure_results: allure-results
           allure_report: allure-report
+          keep_reports: 20
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publush_branch: gh-pages
           publish_dir: allure-report
 
       - name: Telegram Notification
