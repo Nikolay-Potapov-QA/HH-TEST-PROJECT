@@ -1,0 +1,51 @@
+name: Run Postman tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Newman + Allure reporter
+        run: npm install -g newman newman-reporter-allure
+
+      - name: Run live collection (dictionaries, areas)
+        run: |
+          newman run ./hh-live.postman_collection.json \
+          -e ./api.hh.ru.postman_environment.json \
+            --reporters cli,allure \
+            --reporter-allure-resultsDir allure-results
+
+      - name: Run mocked collection (vacancies)
+        run: |
+          newman run ./hh-vacancies-mocked.postman_collection.json \
+            -e ./api.hh.ru.postman_environment.json \
+            --reporters cli,allure \
+            --reporter-allure-resultsDir allure-results
+            
+
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@master
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+
+      - name: Notify Telegram
+        if: always()
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d text="HH API tests: ${{ job.status }}. Report: https://<твой-username>.github.io/<repo>/"
