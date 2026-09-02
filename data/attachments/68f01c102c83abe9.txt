@@ -1,0 +1,9 @@
+// проверка статус кода
+pm.test("Status code is 404", function () {
+    pm.response.to.have.status(404);
+});
+// проверка что тело ответа содержит описание ошибки
+pm.test("Server response contains error description", function () {
+var jsonData = pm.response.json();
+pm.expect(jsonData).to.have.property("errors")
+});

@@ -1,0 +1,21 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+})
+
+pm.test("Response time is less than 1 second", function () {
+    pm.expect(pm.response.responseTime).to.be.below(1000);
+});
+
+pm.test("Response body is not empty", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.be.not.empty;
+});
+
+
+pm.test("Root areas contain required fields: 'id', 'name', 'areas'", function () {
+    var jsonData = pm.response.json();
+    jsonData.forEach(function(country) {
+        pm.expect(country, `Country object missing required properties`).to.include.keys('id', 'name', 'areas');
+    });
+});
+
