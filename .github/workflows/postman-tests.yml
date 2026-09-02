@@ -33,12 +33,14 @@ jobs:
 
       - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
+        if: always()
         with:
           allure_results: allure-results
           allure_report: allure-report
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
+        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-report
@@ -50,7 +52,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            🥶 HH Tests
+            🥶🥶🥶 HH Tests
             
             📊 Статус: ${{ job.status }}
             🔗 Репо: ${{ github.repository }}
