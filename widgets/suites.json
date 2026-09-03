@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":2,"items":[{"uid":"7a084cd9cfcfc75d07241474d22d9ed6","name":"hh-live","statistic":{"failed":6,"broken":0,"skipped":0,"passed":13,"unknown":0,"total":19}},{"uid":"37d7af7dfe3c7dd5f20f6e4caf9a6b69","name":"hh-vacancies-mocked","statistic":{"failed":0,"broken":0,"skipped":0,"passed":4,"unknown":0,"total":4}}]}
