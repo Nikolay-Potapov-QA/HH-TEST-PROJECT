@@ -1,6 +1,0 @@
-// Проверка того, что ответ не содержит кириллицы 
-pm.test("Response body contains no Cyrillic characters (EN localization check)", function () {
-    var responseText = pm.response.text();
-    var cyrillicPattern = /[а-яА-ЯёЁ]/;
-    pm.expect(cyrillicPattern.test(responseText)).to.be.false;
-});

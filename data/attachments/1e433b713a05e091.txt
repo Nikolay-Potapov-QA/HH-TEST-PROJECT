@@ -1,0 +1,18 @@
+{
+  "request_id": "q1ww2e2r4ty",
+  "bad_argument": "string",
+  "bad_arguments": [
+    {
+      "description": "string",
+      "name": "string"
+    }
+  ],
+  "description": "string",
+  "errors": [
+    {
+      "reason": "too_long_value",
+      "type": "bad_argument",
+      "value": "resume_id"
+    }
+  ]
+}

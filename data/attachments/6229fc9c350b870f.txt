@@ -1,8 +1,0 @@
-pm.test("Response status code is 403", function () {
-    pm.response.to.have.status(403);
-});
-
-pm.test("Response body is not empty", function() {
-    const dataJson = pm.response.json();
-    pm.expect(dataJson).to.not.be.empty;
-})

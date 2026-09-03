@@ -1,0 +1,12 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+pm.test("Field 'areas' is empty", function () {
+    var jsonData = pm.response.json();
+pm.expect(jsonData.areas).to.be.empty;
+});
+pm.test("Field 'areas' is an array", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property('areas');
+    pm.expect(jsonData.areas).to.be.an('array');
+});

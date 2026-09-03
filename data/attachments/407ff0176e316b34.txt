@@ -1,0 +1,9 @@
+{
+    "request_id": "q1ww2e2r4ty",
+    "description": "string",
+    "errors": [
+        {
+            "type": "not_found"
+        }
+    ]
+}

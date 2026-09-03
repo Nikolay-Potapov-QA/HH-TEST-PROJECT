@@ -1,0 +1,12 @@
+{
+    "request_id": "q1ww2e2r4ty",
+    "description": "Forbidden",
+    "errors": [
+        {
+            "captcha_url": "https://hh.ru/account/captcha?state=...",
+            "fallback_url": "https://hh.ru/auth/employer?captcha=true&backurl=...",
+            "type": "captcha_required",
+            "value": "captcha_required"
+        }
+    ]
+}
