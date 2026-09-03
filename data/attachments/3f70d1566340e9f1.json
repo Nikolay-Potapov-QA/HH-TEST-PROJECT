@@ -1,0 +1,11 @@
+{
+    "HH-User-Agent": "MyApp/1.0 (my-app-feedback@example.com)",
+    "Accept": "application/json",
+    "Authorization": "<token>",
+    "x-mock-response-name": "TC-VAC-04",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "39778c7c-c3d9-46bc-87ee-0ae1757677a2",
+    "Host": "de2db2f7-1536-45d3-9694-835fdef770e6.mock.pstmn.io",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive"
+}
