@@ -24,9 +24,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{mock_url}}",
+          "raw": "{{mock_url}}/vacancies",
           "host": [
             "{{mock_url}}"
+          ],
+          "path": [
+            "vacancies"
           ]
         }
       },
