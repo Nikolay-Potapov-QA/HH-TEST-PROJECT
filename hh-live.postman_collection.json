@@ -8,7 +8,18 @@
   },
   "item": [
     {
-      "name": "валидация обязательности заголовка user-agent",
+      "name": "TC-HEAD-01, Валидация обязательности заголовка user-agent",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\n    pm.response.to.have.status(400);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+            ]
+          }
+        }
+      ],
       "protocolProfileBehavior": {
         "disabledSystemHeaders": {
           "user-agent": true
@@ -27,7 +38,18 @@
       "response": []
     },
     {
-      "name": "Проверка недопустимого HTTP метода",
+      "name": "TC-DICT-05,Проверка недопустимого HTTP метода",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 405\", function () {\n    pm.response.to.have.status(405);\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -50,7 +72,18 @@
       "response": []
     },
     {
-      "name": "TC-DICT-01_03",
+      "name": "TC-DICT-01_03, Проверка статус кода и времени ответа",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Response time is less than 900ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(900);\n});"
+            ]
+          }
+        }
+      ],
       "protocolProfileBehavior": {
         "disabledSystemHeaders": {}
       },
@@ -68,6 +101,17 @@
     },
     {
       "name": "TC-DICT-04, проверка работы query параметра locale=EN",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Response body contains no Cyrillic characters\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -88,6 +132,17 @@
     },
     {
       "name": "TC-DICT-06, проверка невалидного query параметра locale с цифровым значением",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {\n    pm.response.to.have.status(400);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -123,7 +178,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n})\n\npm.test(\"Response time is less than 1 second\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n\npm.test(\"Response body is not empty\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.not.empty;\n});\n\n\npm.test(\"Root areas contain required fields: 'id', 'name', 'areas'\", function () {\n    var jsonData = pm.response.json();\n    jsonData.forEach(function(country) {\n        pm.expect(country, `Country object missing required properties`).to.include.keys('id', 'name', 'areas');\n    });\n});\n\n"
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n})\npm.test(\"Response time is less than 1 second\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\npm.test(\"Response body is not empty\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.not.empty;\n});\npm.test(\"Root areas contain required fields: 'id', 'name', 'areas'\", function () {\n    var jsonData = pm.response.json();\n    jsonData.forEach(function(country) {\n        pm.expect(country, `Country object missing required properties`).to.include.keys('id', 'name', 'areas');\n    });\n});\n\n"
             ]
           }
         }
@@ -148,7 +203,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Response body contains no Cyrillic characters (EN localization check)\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});"
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Response body contains no Cyrillic characters (EN localization check)\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});"
             ]
           }
         }
@@ -173,6 +228,17 @@
     },
     {
       "name": "TC-AREA-04, проверка недопустимого http метода",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 405\", function () {\n    pm.response.to.have.status(405);\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
@@ -202,7 +268,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// Проверка статус-кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n// Проверка времени ответа от сервера\npm.test(\"Response time is less than 200ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\n// Проверка на то, что корневой id строго равен 113\npm.test(\"Root ID is strictly equal to '113'\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.id).to.eql(\"113\");\n});\n// Проверка на то, что ответ от сервера является объектов а не массивом\npm.test(\"Response is an Object (not Array)\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.an('object');\n});"
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Response time is less than 200ms\", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1000);\n});\npm.test(\"Root ID is strictly equal to '113'\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.id).to.eql(\"113\");\n});\npm.test(\"Response is an Object (not Array)\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.an('object');\n});"
             ]
           }
         }
@@ -230,7 +296,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// Проверка того, что ответ не содержит кириллицы \npm.test(\"Response body contains no Cyrillic characters (EN localization check)\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});"
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Response body contains no Cyrillic characters (EN localization check)\", function () {\n    var responseText = pm.response.text();\n    var cyrillicPattern = /[а-яА-ЯёЁ]/;\n    pm.expect(cyrillicPattern.test(responseText)).to.be.false;\n});"
             ]
           }
         }
@@ -264,7 +330,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// проверка статус кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n// проверка того, что ключ 'areas' является пустым\npm.test(\"Field 'areas' is empty\", function () {\n    var jsonData = pm.response.json();\npm.expect(jsonData.areas).to.be.empty;\n});\n// проверка того, что поле area является массивом\npm.test(\"Field 'areas' is an array\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('areas');\n    pm.expect(jsonData.areas).to.be.an('array');\n});"
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\npm.test(\"Field 'areas' is empty\", function () {\n    var jsonData = pm.response.json();\npm.expect(jsonData.areas).to.be.empty;\n});\npm.test(\"Field 'areas' is an array\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.have.property('areas');\n    pm.expect(jsonData.areas).to.be.an('array');\n});"
             ]
           }
         }
@@ -292,7 +358,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// Проверка статус кода\npm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n\n// Проверка на то что возвращается объект с id=1\n pm.test(\"Returning object contains field id=1\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.id).to.eql(\"1\");\n});\n\n// Проверка на то что родительский id равен 113\npm.test(\"Parent id is 113\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.parent_id).to.eql(\"113\");\n});\n"
+              "pm.test(\"Status code is 200\", function () {\n    pm.response.to.have.status(200);\n});\n pm.test(\"Returning object contains field id=1\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.id).to.eql(\"1\");\n});\npm.test(\"Parent id is 113\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.parent_id).to.eql(\"113\");\n});\n"
             ]
           }
         }
@@ -320,7 +386,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "//проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что ответ от сервера содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"description\")\n});"
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"description\")\n});"
             ]
           }
         }
@@ -376,7 +442,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
             ]
           }
         }
@@ -404,7 +470,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
             ]
           }
         }
@@ -426,6 +492,17 @@
     },
     {
       "name": "TC-AREA-13, проверка обработки числа int32+1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "GET",
         "header": [],
@@ -449,7 +526,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
             ]
           }
         }
@@ -477,7 +554,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "// проверка статус кода\npm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\n// проверка что тело ответа содержит описание ошибки\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
+              "pm.test(\"Status code is 404\", function () {\n    pm.response.to.have.status(404);\n});\npm.test(\"Server response contains error description\", function () {\nvar jsonData = pm.response.json();\npm.expect(jsonData).to.have.property(\"errors\")\n});"
             ]
           }
         }
