@@ -1,0 +1,10 @@
+{
+    "x-mock-response-name": "TC-VAC-01",
+    "User-Agent": "PostmanRuntime/7.39.1",
+    "Accept": "*/*",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "238131ed-50fb-4d7f-9e21-8f7c05a6e076",
+    "Host": "de2db2f7-1536-45d3-9694-835fdef770e6.mock.pstmn.io",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive"
+}
