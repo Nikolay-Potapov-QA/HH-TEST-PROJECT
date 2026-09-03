@@ -23,16 +23,16 @@ jobs:
 
       - name: Run live collection (dictionaries, areas)
         run: |
-          newman run ./hh-live.postman_collection.json \
-          -e ./api.hh.ru.postman_environment.json \
+          newman run ./collections/hh-live.postman_collection.json \
+          -e ./environment/api.hh.ru.postman_environment.json \
             --reporters cli,allure \
             --reporter-allure-resultsDir allure-results
 
       - name: Run mocked collection (vacancies)
         if: always()
         run: |
-          newman run ./hh-vacancies-mocked.postman_collection.json \
-            -e ./api.hh.ru.postman_environment.json \
+          newman run ./collections/hh-vacancies-mocked.postman_collection.json \
+            -e ./environment/api.hh.ru.postman_environment.json \
             --reporters cli,allure \
             --reporter-allure-resultsDir allure-results
             
