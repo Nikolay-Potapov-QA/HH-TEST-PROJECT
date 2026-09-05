@@ -1,1 +1,0 @@
-{"description":"Invalid locale argument","bad_argument":"locale","bad_arguments":[{"name":"locale","description":"Invalid locale argument"}],"errors":[{"value":"locale","type":"bad_argument"}],"request_id":"1788441932705934fcff59f190a07005"}
